@@ -1,3 +1,33 @@
+class vectorArray:
+    class vector:
+        def __init__(self,value,globalTarget=-1,localTarget=-1):
+            self.value=value
+            self.globalTarget=globalTarget
+            self.localTarget=localTarget
+    def __init__(self):
+        self.array=[]
+    def addPoint(self,value,globalTarget,localTarget):
+        self.array.append(vector(value,globalTarget,localTarget))
+    def check(self,value):
+        for vec in self.array:
+            if vec.value==value:
+                return False
+        return True
+    def findIndex(self,value):
+        for a in range(len(self.array)):
+            if self.array[a].value==value:
+                return a
+        return -1
+    def getTrigonalVectors(self,value):
+        index=findIndex(value)
+        currentVector=self.array[index]
+        upperValA=currentVector.value
+        upperValB=currentVector.localTarget
+        targetVector=self.array[currentVector.globalTarget]
+        lowerValA=targetVector.value
+        lowerValB=targetVector.localTarget
+        return [(upperValA,upperValB,lowerValB),(upperValA,lowerValA,lowerValB),(upperValA,upperValB,lowerValB)]
+
 def mk3d(width,length,height):
     out=[]
     row=[]
